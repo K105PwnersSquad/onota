@@ -22,6 +22,9 @@
 		84FCF7211A8A2D2200CC99F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84FCF7001A8A2D2100CC99F5 /* UIKit.framework */; };
 		84FCF7291A8A2D2200CC99F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84FCF7271A8A2D2200CC99F5 /* InfoPlist.strings */; };
 		84FCF72B1A8A2D2200CC99F5 /* onotaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FCF72A1A8A2D2200CC99F5 /* onotaTests.m */; };
+		84FCF7381A8A4EDC00CC99F5 /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FCF7371A8A4EDC00CC99F5 /* Field.m */; };
+		84FCF73B1A8A4F0200CC99F5 /* IntegerPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FCF73A1A8A4F0200CC99F5 /* IntegerPoint.m */; };
+		84FCF73E1A8A4F1600CC99F5 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FCF73D1A8A4F1600CC99F5 /* Cell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,13 @@
 		84FCF7261A8A2D2200CC99F5 /* onotaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "onotaTests-Info.plist"; sourceTree = "<group>"; };
 		84FCF7281A8A2D2200CC99F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84FCF72A1A8A2D2200CC99F5 /* onotaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = onotaTests.m; sourceTree = "<group>"; };
+		84FCF7341A8A4DB500CC99F5 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		84FCF7361A8A4EDC00CC99F5 /* Field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Field.h; sourceTree = "<group>"; };
+		84FCF7371A8A4EDC00CC99F5 /* Field.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Field.m; sourceTree = "<group>"; };
+		84FCF7391A8A4F0200CC99F5 /* IntegerPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegerPoint.h; sourceTree = "<group>"; };
+		84FCF73A1A8A4F0200CC99F5 /* IntegerPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegerPoint.m; sourceTree = "<group>"; };
+		84FCF73C1A8A4F1600CC99F5 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		84FCF73D1A8A4F1600CC99F5 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +94,7 @@
 		84FCF6F01A8A2D2100CC99F5 = {
 			isa = PBXGroup;
 			children = (
+				84FCF7031A8A2D2100CC99F5 /* Supporting Files */,
 				84FCF7021A8A2D2100CC99F5 /* onota */,
 				84FCF7241A8A2D2200CC99F5 /* onotaTests */,
 				84FCF6FB1A8A2D2100CC99F5 /* Frameworks */,
@@ -114,10 +125,10 @@
 		84FCF7021A8A2D2100CC99F5 /* onota */ = {
 			isa = PBXGroup;
 			children = (
+				84FCF7351A8A4DD100CC99F5 /* model */,
 				84FCF7111A8A2D2100CC99F5 /* Main_iPad.storyboard */,
 				84FCF7141A8A2D2100CC99F5 /* ViewController.h */,
 				84FCF7151A8A2D2100CC99F5 /* ViewController.m */,
-				84FCF7031A8A2D2100CC99F5 /* Supporting Files */,
 			);
 			path = onota;
 			sourceTree = "<group>";
@@ -135,6 +146,7 @@
 				84FCF70A1A8A2D2100CC99F5 /* onota-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = onota;
 			sourceTree = "<group>";
 		};
 		84FCF7241A8A2D2200CC99F5 /* onotaTests */ = {
@@ -153,6 +165,20 @@
 				84FCF7271A8A2D2200CC99F5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84FCF7351A8A4DD100CC99F5 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				84FCF7341A8A4DB500CC99F5 /* Globals.h */,
+				84FCF7361A8A4EDC00CC99F5 /* Field.h */,
+				84FCF7371A8A4EDC00CC99F5 /* Field.m */,
+				84FCF7391A8A4F0200CC99F5 /* IntegerPoint.h */,
+				84FCF73A1A8A4F0200CC99F5 /* IntegerPoint.m */,
+				84FCF73C1A8A4F1600CC99F5 /* Cell.h */,
+				84FCF73D1A8A4F1600CC99F5 /* Cell.m */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,9 +279,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FCF73B1A8A4F0200CC99F5 /* IntegerPoint.m in Sources */,
 				84FCF7161A8A2D2100CC99F5 /* ViewController.m in Sources */,
 				84FCF70D1A8A2D2100CC99F5 /* AppDelegate.m in Sources */,
+				84FCF7381A8A4EDC00CC99F5 /* Field.m in Sources */,
 				84FCF7091A8A2D2100CC99F5 /* main.m in Sources */,
+				84FCF73E1A8A4F1600CC99F5 /* Cell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +501,7 @@
 				84FCF7301A8A2D2200CC99F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		84FCF7311A8A2D2200CC99F5 /* Build configuration list for PBXNativeTarget "onotaTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +510,7 @@
 				84FCF7331A8A2D2200CC99F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

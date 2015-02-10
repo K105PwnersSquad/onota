@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 ___FULLUSERNAME___. All rights reserved.
 //
 
+#import "Field.h"
 #import "ViewController.h"
 
 @interface ViewController ()
@@ -14,10 +15,17 @@
 
 @implementation ViewController
 
+Field *field;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     NSLog(@"privet");
+    [self.view setBackgroundColor:[UIColor greenColor]];
+    
+    field = [[Field alloc] init];
+    
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
