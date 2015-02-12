@@ -14,6 +14,8 @@
 @property (nonatomic, readwrite) NSMutableArray *templateField;
 @property (nonatomic, readwrite) IntegerPoint *currentPosition;
 @property (nonatomic, readwrite) IntegerPoint *initialPosition;
+@property (nonatomic, readwrite) int fieldHeight;
+@property (nonatomic, readwrite) int fieldWidth;
 
 -(BOOL) isCorrect;
 

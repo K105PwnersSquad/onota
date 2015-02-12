@@ -1,1 +1,3 @@
 #define CELL_WIDTH 20
+#define FIELD_WIDTH 8
+#define FIELD_HEIGHT 8

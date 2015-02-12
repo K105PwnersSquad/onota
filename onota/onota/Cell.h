@@ -12,6 +12,7 @@ typedef enum {
     CellStateOne = 0,
     CellStateTwo,
     CellStateThree,
+    CellStateEmpty,
     numCellStates
 } CellState;
 
