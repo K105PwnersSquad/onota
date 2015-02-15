@@ -5,7 +5,8 @@
 //  Created by Admin on 10.02.15.
 //  Copyright (c) 2015 ___FULLUSERNAME___. All rights reserved.
 //
-
+#define SCREEN_WIDTH (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation) ? [[UIScreen mainScreen] bounds].size.width : [[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_HEIGHT (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
 #import "Field.h"
 #import "ViewController.h"
 #import "Cell.h"
@@ -18,6 +19,7 @@
 @implementation ViewController
 
 NSMutableArray *buttons;
+NSMutableArray *templateButtons;
 
 Field *field;
 
@@ -30,16 +32,18 @@ Field *field;
     
     field = [[Field alloc] init];
     buttons = [NSMutableArray new];
-    int cellWidth = [[UIScreen mainScreen] bounds].size.height / 17;
+    templateButtons = [NSMutableArray new];
     
-    CGPoint buttonStartPoint = CGPointMake([[UIScreen mainScreen] bounds].size.width * 4 / 22,
-                                           [[UIScreen mainScreen] bounds].size.height * 1.5 / 17);
+    int cellWidthField = SCREEN_WIDTH * 7 / 12 / field.fieldWidth;
+    
+    CGPoint fieldStartPoint = CGPointMake(SCREEN_WIDTH * 1 / 4,
+                                           SCREEN_HEIGHT * 1.5 / 17);
     
     for (int i = 0; i < field.fieldWidth * field.fieldHeight; i++) {
-        buttons[i] = [[UIButton alloc] initWithFrame:CGRectMake(buttonStartPoint.x + i % field.fieldWidth * (cellWidth + 1),
-                                                                buttonStartPoint.y + i / field.fieldWidth * (cellWidth + 1),
-                                                                cellWidth - 1,
-                                                                cellWidth - 1)];
+        buttons[i] = [[UIButton alloc] initWithFrame:CGRectMake(fieldStartPoint.x + i % field.fieldWidth * (cellWidthField + 1),
+                                                                fieldStartPoint.y + i / field.fieldWidth * (cellWidthField + 1),
+                                                                cellWidthField - 1,
+                                                                cellWidthField - 1)];
         Cell *cell = [field.gameField objectAtIndex:i];
         BOOL isEmpty = NO;
         switch (cell.cellState) {
@@ -66,6 +70,40 @@ Field *field;
     }
     UIButton *button = buttons[field.initialPosition.x + field.initialPosition.y * field.fieldWidth ];
     [self changeButtonFrame:button forState:YES];
+    
+    int cellWidthTemplate = SCREEN_HEIGHT / 10 / field.fieldWidth;
+    CGPoint templateStartPoint = CGPointMake(SCREEN_WIDTH * 13 / 16,
+                                             SCREEN_HEIGHT * 1 / 16);
+    
+    for (int i = 0; i < field.fieldWidth * field.fieldHeight; i++) {
+        templateButtons[i] = [[UIButton alloc] initWithFrame:CGRectMake(templateStartPoint.x + i % field.fieldWidth * (cellWidthTemplate + 1),
+                                                                templateStartPoint.y + i / field.fieldWidth * (cellWidthTemplate + 1),
+                                                                cellWidthTemplate - 1,
+                                                                cellWidthTemplate - 1)];
+        Cell *cell = [field.templateField objectAtIndex:i];
+        BOOL isEmpty = NO;
+        switch (cell.cellState) {
+            case CellStateOne:
+                [templateButtons[i] setBackgroundColor:[UIColor redColor]];
+                break;
+            case CellStateTwo:
+                [templateButtons[i] setBackgroundColor:[UIColor greenColor]];
+                break;
+            case CellStateThree:
+                [templateButtons[i] setBackgroundColor:[UIColor blueColor]];
+                break;
+            case CellStateEmpty:
+                isEmpty = YES;
+                break;
+            default:
+                [NSException raise:@"cell_state_exception" format:@"invalid cell state"];
+                break;
+        }
+        //        [buttons[i] addTarget:self action:@selectorpressBtn:) forControlEvents:UIControlEventTouchUpInside];
+        if (!isEmpty) {
+            [self.view addSubview:templateButtons[i]];
+        }
+    }
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -98,6 +136,9 @@ Field *field;
         [self paintCell:field.currentPosition];
         [self changeButtonFrame:buttons[field.previousPosition.x + field.previousPosition.y * field.fieldWidth] forState:NO];
         [self changeButtonFrame:buttons[field.currentPosition.x + field.currentPosition.y * field.fieldWidth] forState:YES];
+        if ([field isCorrect]) {
+            [self levelCompleted];
+        }
     }
 }
 
@@ -106,6 +147,9 @@ Field *field;
         [self paintCell:field.currentPosition];
         [self changeButtonFrame:buttons[field.previousPosition.x + field.previousPosition.y * field.fieldWidth] forState:NO];
         [self changeButtonFrame:buttons[field.currentPosition.x + field.currentPosition.y * field.fieldWidth] forState:YES];
+        if ([field isCorrect]) {
+            [self levelCompleted];
+        }
     }
 }
 
@@ -114,6 +158,9 @@ Field *field;
         [self paintCell:field.currentPosition];
         [self changeButtonFrame:buttons[field.previousPosition.x + field.previousPosition.y * field.fieldWidth] forState:NO];
         [self changeButtonFrame:buttons[field.currentPosition.x + field.currentPosition.y * field.fieldWidth] forState:YES];
+        if ([field isCorrect]) {
+            [self levelCompleted];
+        }
     }
 }
 
@@ -122,6 +169,9 @@ Field *field;
         [self paintCell:field.currentPosition];
         [self changeButtonFrame:buttons[field.previousPosition.x + field.previousPosition.y * field.fieldWidth] forState:NO];
         [self changeButtonFrame:buttons[field.currentPosition.x + field.currentPosition.y * field.fieldWidth] forState:YES];
+        if ([field isCorrect]) {
+            [self levelCompleted];
+        }
     }
 }
 
@@ -143,6 +193,11 @@ Field *field;
             [NSException raise:@"cell_state_exception" format:@"invalid cell state"];
             break;
     }
+}
+
+-(void) levelCompleted
+{
+    NSLog(@"igra okonchena, vse svobodni");
 }
 
 @end

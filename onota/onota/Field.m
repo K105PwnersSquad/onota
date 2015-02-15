@@ -26,7 +26,15 @@
 
 -(BOOL) isCorrect
 {
-    return NO;
+    for (int i = 0; i < self.fieldWidth * self.fieldHeight; i++) {
+        Cell *cell1 = self.gameField[i];
+        Cell *cell2 = self.templateField[i];
+        if (cell1.cellState != cell2.cellState) {
+            NSLog(@"%d", i);
+            return NO;
+        }
+    }
+    return YES;
 }
 
 -(BOOL) moveLeft
@@ -292,8 +300,8 @@
 //    cell1.cellState = CellStateOne;
 //    Cell *cell2 = [Cell new];
 //    cell2.cellState = CellStateTwo;
-//    Cell *cell3 = [Cell new];
-//    cell3.cellState = CellStateThree;
+    Cell *cell3 = [Cell new];
+    cell3.cellState = CellStateThree;
     Cell *cellEmpty = [Cell new];
     cellEmpty.cellState = CellStateEmpty;
     for (int i = 0; i < _fieldHeight * _fieldWidth; i++) {
@@ -301,11 +309,18 @@
         cell.cellState = i % 3;
         [_gameField addObject:cell];
     }
+    for (int i = 0; i < _fieldHeight * _fieldWidth; i++) {
+        Cell *cell = [Cell new];
+        cell.cellState = i % 3;
+        [_templateField addObject:cell];
+    }
+    _templateField[0] = cell3;
 //    _gameField[2] = cell2;
 //    _gameField[3] = cell3;
 //    _gameField[9] = cell2;
 //    _gameField[10] = cell3;
     _gameField[7] = cellEmpty;
+    _templateField[7] = cellEmpty;
 }
 
 @end

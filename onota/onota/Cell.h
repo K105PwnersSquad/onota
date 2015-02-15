@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    CellStateOne = 0,
-    CellStateTwo,
-    CellStateThree,
+    CellStateOne = 0,           //red
+    CellStateTwo,               //green
+    CellStateThree,             //blue
     CellStateEmpty,
     numCellStates
 } CellState;
