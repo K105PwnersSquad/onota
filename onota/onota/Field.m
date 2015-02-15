@@ -29,55 +29,283 @@
     return NO;
 }
 
--(void) moveLeft
+-(BOOL) moveLeft
 {
-    
+    IntegerPoint *ip = [IntegerPoint integerPointWithX:self.currentPosition.x - 1 andY:self.currentPosition.y];
+    if (ip.x < 0)  {
+        return NO;
+    }
+    Cell *newCell = self.gameField[ip.x + ip.y * self.fieldWidth];
+    if (newCell.cellState == CellStateEmpty) {
+        return NO;
+    }
+    Cell *oldCell = self.gameField[self.currentPosition.x + self.currentPosition.y * self.fieldWidth];
+    switch (newCell.cellState) {
+        case CellStateOne:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    break;
+                case CellStateTwo:
+                    newCell.cellState = CellStateThree;
+                    break;
+                case CellStateThree:
+                    newCell.cellState = CellStateTwo;
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_left" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        case CellStateTwo:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    newCell.cellState = CellStateThree;
+                    break;
+                case CellStateTwo:
+                    break;
+                case CellStateThree:
+                    newCell.cellState = CellStateOne;
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_left" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        case CellStateThree:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    newCell.cellState = CellStateTwo;
+                    break;
+                case CellStateTwo:
+                    newCell.cellState = CellStateOne;
+                    break;
+                case CellStateThree:
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_left" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        default: [NSException raise:@"cell_state_exception_move_left" format:@"invalid cell state"];
+            break;
+    }
+    self.previousPosition = self.currentPosition;
+    self.currentPosition = ip;
+    self.gameField[ip.x + ip.y * self.fieldWidth] = newCell;
+    return YES;
 }
 
--(void) moveRight
+-(BOOL) moveRight
 {
-    
+    IntegerPoint *ip = [IntegerPoint integerPointWithX:self.currentPosition.x + 1 andY:self.currentPosition.y];
+    if (ip.x >= self.fieldWidth)  {
+        return NO;
+    }
+    Cell *newCell = self.gameField[ip.x + ip.y * self.fieldWidth];
+    if (newCell.cellState == CellStateEmpty) {
+        return NO;
+    }
+    Cell *oldCell = self.gameField[self.currentPosition.x + self.currentPosition.y * self.fieldWidth];
+    switch (newCell.cellState) {
+        case CellStateOne:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    break;
+                case CellStateTwo:
+                    newCell.cellState = CellStateThree;
+                    break;
+                case CellStateThree:
+                    newCell.cellState = CellStateTwo;
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_right" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        case CellStateTwo:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    newCell.cellState = CellStateThree;
+                    break;
+                case CellStateTwo:
+                    break;
+                case CellStateThree:
+                    newCell.cellState = CellStateOne;
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_right" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        case CellStateThree:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    newCell.cellState = CellStateTwo;
+                    break;
+                case CellStateTwo:
+                    newCell.cellState = CellStateOne;
+                    break;
+                case CellStateThree:
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_right" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        default: [NSException raise:@"cell_state_exception_move_right" format:@"invalid cell state"];
+            break;
+    }
+    self.previousPosition = self.currentPosition;
+    self.currentPosition = ip;
+    self.gameField[ip.x + ip.y * self.fieldWidth] = newCell;
+    return YES;
 }
 
--(void) moveUp
+-(BOOL) moveUp
 {
-    
+    IntegerPoint *ip = [IntegerPoint integerPointWithX:self.currentPosition.x andY:self.currentPosition.y - 1];
+    if (ip.y < 0)  {
+        return NO;
+    }
+    Cell *newCell = self.gameField[ip.x + ip.y * self.fieldWidth];
+    if (newCell.cellState == CellStateEmpty) {
+        return NO;
+    }
+    Cell *oldCell = self.gameField[self.currentPosition.x + self.currentPosition.y * self.fieldWidth];
+    switch (newCell.cellState) {
+        case CellStateOne:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    break;
+                case CellStateTwo:
+                    newCell.cellState = CellStateThree;
+                    break;
+                case CellStateThree:
+                    newCell.cellState = CellStateTwo;
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_up" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        case CellStateTwo:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    newCell.cellState = CellStateThree;
+                    break;
+                case CellStateTwo:
+                    break;
+                case CellStateThree:
+                    newCell.cellState = CellStateOne;
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_up" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        case CellStateThree:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    newCell.cellState = CellStateTwo;
+                    break;
+                case CellStateTwo:
+                    newCell.cellState = CellStateOne;
+                    break;
+                case CellStateThree:
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_up" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        default: [NSException raise:@"cell_state_exception_move_up" format:@"invalid cell state"];
+            break;
+    }
+    self.previousPosition = self.currentPosition;
+    self.currentPosition = ip;
+    self.gameField[ip.x + ip.y * self.fieldWidth] = newCell;
+    return YES;
 }
 
--(void) moveDown
+-(BOOL) moveDown
 {
-    
+    IntegerPoint *ip = [IntegerPoint integerPointWithX:self.currentPosition.x andY:self.currentPosition.y + 1];
+    if (ip.y >= self.fieldHeight)  {
+        return NO;
+    }
+    Cell *newCell = self.gameField[ip.x + ip.y * self.fieldWidth];
+    if (newCell.cellState == CellStateEmpty) {
+        return NO;
+    }
+    Cell *oldCell = self.gameField[self.currentPosition.x + self.currentPosition.y * self.fieldWidth];
+    switch (newCell.cellState) {
+        case CellStateOne:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    break;
+                case CellStateTwo:
+                    newCell.cellState = CellStateThree;
+                    break;
+                case CellStateThree:
+                    newCell.cellState = CellStateTwo;
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_down" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        case CellStateTwo:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    newCell.cellState = CellStateThree;
+                    break;
+                case CellStateTwo:
+                    break;
+                case CellStateThree:
+                    newCell.cellState = CellStateOne;
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_down" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        case CellStateThree:
+            switch (oldCell.cellState) {
+                case CellStateOne:
+                    newCell.cellState = CellStateTwo;
+                    break;
+                case CellStateTwo:
+                    newCell.cellState = CellStateOne;
+                    break;
+                case CellStateThree:
+                    break;
+                default: [NSException raise:@"cell_state_exception_move_down" format:@"invalid cell state"];
+                    break;
+            }
+            break;
+        default: [NSException raise:@"cell_state_exception_move_down" format:@"invalid cell state"];
+            break;
+    }
+    self.previousPosition = self.currentPosition;
+    self.currentPosition = ip;
+    self.gameField[ip.x + ip.y * self.fieldWidth] = newCell;
+    return YES;
 }
 
 -(void) generateField
 {
     self.gameField = [NSMutableArray new];
     self.templateField = [NSMutableArray new];
-    
-    Cell *cell1 = [Cell new];
-    cell1.cellState = CellStateOne;
-    Cell *cell2 = [Cell new];
-    cell2.cellState = CellStateTwo;
-    Cell *cell3 = [Cell new];
-    cell3.cellState = CellStateThree;
+    self.initialPosition = [IntegerPoint integerPointWithX:INITIAL_POINT_X andY:INITIAL_POINT_Y];
+    self.currentPosition = self.initialPosition;
+    self.previousPosition = self.initialPosition;
+//    Cell *cell1 = [Cell new];
+//    cell1.cellState = CellStateOne;
+//    Cell *cell2 = [Cell new];
+//    cell2.cellState = CellStateTwo;
+//    Cell *cell3 = [Cell new];
+//    cell3.cellState = CellStateThree;
     Cell *cellEmpty = [Cell new];
     cellEmpty.cellState = CellStateEmpty;
     for (int i = 0; i < _fieldHeight * _fieldWidth; i++) {
-        [_gameField addObject:cell1];
+        Cell *cell = [Cell new];
+        cell.cellState = i % 3;
+        [_gameField addObject:cell];
     }
-    _gameField[2] = cell2;
-    _gameField[3] = cell3;
-    _gameField[9] = cell2;
-    _gameField[10] = cell3;
+//    _gameField[2] = cell2;
+//    _gameField[3] = cell3;
+//    _gameField[9] = cell2;
+//    _gameField[10] = cell3;
     _gameField[7] = cellEmpty;
-//        _gameField =               (NSMutableArray *)@[
-//                                cell1, cell1, cell2, cell2, cell3, cell3, cell1, cell2,
-//                                cell1, cell1, cell2, cell2, cell3, cell3, cell1, cell2,
-//                                cell1, cell1, cell2, cell2, cell3, cell3, cell1, cell2,
-//                                cell1, cell1, cell2, cell2, cell3, cell3, cell1, cell2,
-//                                cell1, cell1, cell2, cell2, cell3, cell3, cell1, cell2,
-//                                cell1, cell1, cell2, cell2, cell3, cell3, cell1, cell2
-//                               ];
 }
 
 @end

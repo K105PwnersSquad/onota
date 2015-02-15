@@ -14,15 +14,16 @@
 @property (nonatomic, readwrite) NSMutableArray *templateField;
 @property (nonatomic, readwrite) IntegerPoint *currentPosition;
 @property (nonatomic, readwrite) IntegerPoint *initialPosition;
+@property (nonatomic, readwrite) IntegerPoint *previousPosition;
 @property (nonatomic, readwrite) int fieldHeight;
 @property (nonatomic, readwrite) int fieldWidth;
 
 -(BOOL) isCorrect;
 
--(void) moveLeft;
--(void) moveRight;
--(void) moveUp;
--(void) moveDown;
+-(BOOL) moveLeft;
+-(BOOL) moveRight;
+-(BOOL) moveUp;
+-(BOOL) moveDown;
 -(void) generateField;
 
 @end

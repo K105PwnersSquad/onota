@@ -64,16 +64,8 @@ Field *field;
             [self.view addSubview:buttons[i]];
         }
     }
-//    UIButton *button = buttons[0];
-//    [button setFrame:CGRectMake(button.frame.origin.x - 1,
-//                                button.frame.origin.y - 1,
-//                                button.frame.size.width + 2,
-//                                button.frame.size.height + 2)];
-//    button.layer.borderWidth = 3.0;
-//    button.layer.borderColor = [[UIColor yellowColor] CGColor];
-    UIButton *button = buttons[0];
+    UIButton *button = buttons[field.initialPosition.x + field.initialPosition.y * field.fieldWidth ];
     [self changeButtonFrame:button forState:YES];
-    [self changeButtonFrame:button forState:NO];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -98,6 +90,58 @@ Field *field;
                                     button.frame.size.width - 2,
                                     button.frame.size.height - 2)];
         button.layer.borderWidth = 0.0;
+    }
+}
+
+- (IBAction)upButtonTouch:(id)sender {
+    if ([field moveUp]) {
+        [self paintCell:field.currentPosition];
+        [self changeButtonFrame:buttons[field.previousPosition.x + field.previousPosition.y * field.fieldWidth] forState:NO];
+        [self changeButtonFrame:buttons[field.currentPosition.x + field.currentPosition.y * field.fieldWidth] forState:YES];
+    }
+}
+
+- (IBAction)rightButtonTouch:(id)sender {
+    if ([field moveRight]) {
+        [self paintCell:field.currentPosition];
+        [self changeButtonFrame:buttons[field.previousPosition.x + field.previousPosition.y * field.fieldWidth] forState:NO];
+        [self changeButtonFrame:buttons[field.currentPosition.x + field.currentPosition.y * field.fieldWidth] forState:YES];
+    }
+}
+
+- (IBAction)leftButtonTouch:(id)sender {
+    if ([field moveLeft]) {
+        [self paintCell:field.currentPosition];
+        [self changeButtonFrame:buttons[field.previousPosition.x + field.previousPosition.y * field.fieldWidth] forState:NO];
+        [self changeButtonFrame:buttons[field.currentPosition.x + field.currentPosition.y * field.fieldWidth] forState:YES];
+    }
+}
+
+- (IBAction)downButtonTouch:(id)sender {
+    if ([field moveDown]) {
+        [self paintCell:field.currentPosition];
+        [self changeButtonFrame:buttons[field.previousPosition.x + field.previousPosition.y * field.fieldWidth] forState:NO];
+        [self changeButtonFrame:buttons[field.currentPosition.x + field.currentPosition.y * field.fieldWidth] forState:YES];
+    }
+}
+
+- (void) paintCell: (IntegerPoint *) ip
+{
+    int buttonPosition = ip.x + ip.y * field.fieldWidth;
+    Cell *cell = field.gameField[buttonPosition];
+    switch (cell.cellState) {
+        case CellStateOne:
+            [buttons[buttonPosition] setBackgroundColor:[UIColor redColor]];
+            break;
+        case CellStateTwo:
+            [buttons[buttonPosition] setBackgroundColor:[UIColor greenColor]];
+            break;
+        case CellStateThree:
+            [buttons[buttonPosition] setBackgroundColor:[UIColor blueColor]];
+            break;
+        default:
+            [NSException raise:@"cell_state_exception" format:@"invalid cell state"];
+            break;
     }
 }
 
