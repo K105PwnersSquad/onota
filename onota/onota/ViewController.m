@@ -36,7 +36,7 @@ Field *field;
     
     int cellWidthField = SCREEN_WIDTH * 7 / 12 / field.fieldWidth;
     
-    CGPoint fieldStartPoint = CGPointMake(SCREEN_WIDTH * 1 / 4,
+    CGPoint fieldStartPoint = CGPointMake(SCREEN_WIDTH * 1 / 8,
                                            SCREEN_HEIGHT * 1.5 / 17);
     
     for (int i = 0; i < field.fieldWidth * field.fieldHeight; i++) {
@@ -71,8 +71,8 @@ Field *field;
     UIButton *button = buttons[field.initialPosition.x + field.initialPosition.y * field.fieldWidth ];
     [self changeButtonFrame:button forState:YES];
     
-    int cellWidthTemplate = SCREEN_HEIGHT / 10 / field.fieldWidth;
-    CGPoint templateStartPoint = CGPointMake(SCREEN_WIDTH * 13 / 16,
+    int cellWidthTemplate = SCREEN_HEIGHT / 5 / field.fieldWidth;
+    CGPoint templateStartPoint = CGPointMake(SCREEN_WIDTH * 25 / 32,
                                              SCREEN_HEIGHT * 1 / 16);
     
     for (int i = 0; i < field.fieldWidth * field.fieldHeight; i++) {
