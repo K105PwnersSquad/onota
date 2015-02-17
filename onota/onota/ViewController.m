@@ -104,6 +104,23 @@ Field *field;
             [self.view addSubview:templateButtons[i]];
         }
     }
+    for (int i = 0; i < field.fieldHeight * field.fieldWidth; i++) {
+        UIButton *button = buttons[i];
+        UIImage *lvlImage = [UIImage imageNamed:@"chest-67592_1280.jpg"];
+        CGImageRef bigImage = lvlImage.CGImage;
+        CGImageRef partOfBigImage =
+            CGImageCreateWithImageInRect(bigImage,
+                                    CGRectMake(lvlImage.size.width / field.fieldWidth * (i % field.fieldWidth),
+                                               lvlImage.size.height / field.fieldHeight * (i / field.fieldWidth),
+                                                lvlImage.size.width / field.fieldWidth,
+                                                lvlImage.size.height / field.fieldHeight));
+        
+        UIImage *partOfImage = [UIImage imageWithCGImage:partOfBigImage];
+        [button setImage:partOfImage forState:UIControlStateNormal];
+        UIButton *templateButton = templateButtons[i];
+        [templateButton setImage:partOfImage forState:UIControlStateNormal];
+    }
+    
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
