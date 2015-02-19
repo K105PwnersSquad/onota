@@ -30,7 +30,6 @@
         Cell *cell1 = self.gameField[i];
         Cell *cell2 = self.templateField[i];
         if (cell1.cellState != cell2.cellState) {
-            NSLog(@"%d", i);
             return NO;
         }
     }
